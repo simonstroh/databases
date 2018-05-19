@@ -12,7 +12,7 @@ var app = {
       url: this.server,
       type: 'POST',
       json: message,
-      contentType: 'text/plain',
+      contentType: 'application/json',
       success: function(data) {
         console.log("POSTED!");
       },
@@ -27,9 +27,9 @@ var app = {
       type: 'GET',
       success: function(data) {
         var parsed = data
-        for (var i = 0; i < parsed.results.length; i++) {
-          notYourData.push(parsed.results[i].roomname)
-          app.renderMessage(parsed.results[i]);
+        for (var i = 0; i < parsed.length; i++) {
+          notYourData.push(parsed[i].roomname)
+          app.renderMessage(parsed[i]);
         }
         app.renderRoom()
       }
@@ -63,7 +63,7 @@ var app = {
       alert("You didn't send any messages!")
       return
     }
-    var message = JSON.stringify(messageObject)
+    var message = messageObject
     app.send(message);
     app.renderMessage(messageObject);
     $('#message').val('Write your message here')

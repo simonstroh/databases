@@ -2,14 +2,30 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {}, // a function which produces all the messages
-    post: function () {} // a function which can be used to insert a message into the database
+    get: function (res) {
+      // console.log("Request type GET served!")
+      res.writeHead(200, {'access-control-allow-origin': '*'})
+      res.end(db.messages)
+    },
+    post: function (res, data) {
+      // console.log("Request type POST served!")
+      db.post(data)
+      res.writeHead(201, {'Content-Type': 'application/json'})
+      res.end()
+    }
   },
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
+    get: function (res) {
+      var users = db.query("SELECT * FROM users")
+      res.writeHead(200, {'access-control-allow-origin': '*'})
+      res.end(users)
+    },
+    post: function (res) {
+      // db.post()
+      res.writeHead(201, {'Content-Type': 'text/plain'})
+      res.end()
+    }
   }
 };
-
