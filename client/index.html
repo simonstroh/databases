@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      // YOU DO NOT NEED TO EDIT THIS CODE
+      if (!/(&|\?)username=/.test(window.location.search)) {
+        var newSearch = window.location.search;
+        if (newSearch !== '' & newSearch !== '?') {
+          newSearch += '&';
+        }
+        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+        window.location.search = newSearch;
+      }
+    </script>
+    <!-- your scripts -->
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div style="padding: 20px">
+      <div id="borderimg2">
+        <div id="main">
+          <h1>chatterbox</h1>
+          <!-- Your HTML goes here! -->
+          <form action="javascript:app.handleSubmit()">
+            <input id="message" name="" type="textarea" placeholder="Write your message here"></input>
+            <input type="submit" id="send" class="submit"></input>
+            <p style="font-family:'Krungthep'; font-size: 12pt; color: white; padding: 4px; margin-top: 16px">CHANNELS</p>
+            <select id="roomSelect"></select>
+          </form>
+        </div>
+      </div>
+      <div id="chats">
+      </div>
+    </div>
+    <script>
+      (function() {
+        app.fetch()
+      })();
+    </script>
+  </body>
+</html>
