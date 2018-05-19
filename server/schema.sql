@@ -17,13 +17,9 @@ CREATE TABLE rooms (
 CREATE TABLE messages (
   /* Describe your table here.*/
   messageID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  content varchar(140) NOT NULL,
-  userID int NOT NULL,
-  roomID int NULL,
-  CONSTRAINT FK_User FOREIGN KEY (userID)
-  REFERENCES users(userID),
-  CONSTRAINT FK_Room FOREIGN KEY (roomID)
-  REFERENCES rooms(roomID)
+  username varchar(140) NOT NULL,
+  roomname varchar(140) NOT NULL,
+  message varchar(140) NOT NULL
 );
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
