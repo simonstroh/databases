@@ -32,10 +32,11 @@ var insert = function(sql) {
 }
 
 exports.post = function(obj) {
-  console.log("This is a post to the SQL server")
+  console.log("This is a post to the SQL server:", obj)
+  console.log("The thing is an:", typeof obj)
   var sqlUsers = `INSERT INTO users(userName) VALUES ("${obj.username}")`
   var sqlRooms = `INSERT INTO rooms(roomName) VALUES ("${obj.roomname}")`
-  var sqlMessages = `INSERT INTO messages(username, roomname, message) VALUES ("${obj.username}", "${obj.roomname}", "${obj.text}")`
+  var sqlMessages = `INSERT INTO messages(username, roomname, message) VALUES ("${obj.username}", "${obj.roomname}", "${obj.message}")`
   insert(sqlUsers)
   insert(sqlRooms)
   insert(sqlMessages)

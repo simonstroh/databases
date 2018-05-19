@@ -11,14 +11,8 @@ var app = {
     $.ajax({
       url: this.server,
       type: 'POST',
-      json: message,
-      contentType: 'application/json',
-      success: function(data) {
-        console.log("POSTED!");
-      },
-      error: function() {
-        console.log("ERROR!");
-      }
+      data: JSON.stringify(message),
+      contentType: 'application/json'
     })
   },
   fetch: function(data) {
@@ -26,7 +20,7 @@ var app = {
       url: this.server,
       type: 'GET',
       success: function(data) {
-        var parsed = data
+        var parsed = JSON.parse(data)
         for (var i = 0; i < parsed.length; i++) {
           notYourData.push(parsed[i].roomname)
           app.renderMessage(parsed[i]);
@@ -43,7 +37,7 @@ var app = {
   },
   renderMessage: function(message) {
     var escapedUsername = app.escapedText(message.username + '')
-    var escapedMessage = app.escapedText(message.text + '')
+    var escapedMessage = app.escapedText(message.message + '')
     $('#chats').append(`<div><span onclick ="app.handleUsernameClick()" class="username">${escapedUsername}</span>: ${escapedMessage}</div>`);
   },
   renderRoom: function(roomname) {
@@ -56,7 +50,7 @@ var app = {
   handleSubmit: function() {
     var messageObject = {
       username: window.location.search.slice(window.location.search.indexOf('=') + 1, window.location.search.length),
-      text: $('#message').val(),
+      message: $('#message').val(),
       roomname: $('#roomSelect').val()
     };
     if (messageObject.text === "") {
