@@ -4,8 +4,11 @@ module.exports = {
   messages: {
     get: function (res) {
       // console.log("Request type GET served!")
+      db.query("SELECT * FROM messages")
       res.writeHead(200, {'access-control-allow-origin': '*'})
-      res.end(db.messages)
+      setTimeout(function() {
+        res.end(db.results)
+      }, 2000)
     },
     post: function (res, data) {
       // console.log("Request type POST served!")
@@ -18,12 +21,14 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function (res) {
-      var users = db.query("SELECT * FROM users")
+      db.query("SELECT * FROM users")
       res.writeHead(200, {'access-control-allow-origin': '*'})
-      res.end(users)
+      setTimeout(function() {
+        res.end(db.results)
+      }, 2000)
     },
-    post: function (res) {
-      // db.post()
+    post: function (res, data) {
+      db.post(data)
       res.writeHead(201, {'Content-Type': 'text/plain'})
       res.end()
     }

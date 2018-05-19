@@ -20,7 +20,7 @@ module.exports = {
     },
     post: function (req, res) {
       console.log("Serving request type " + req.method + " for url /classes" + req.url)
-      models.users.post(res)
+      models.users.post(res, req.body)
     }
   }
 };

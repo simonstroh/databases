@@ -14,7 +14,6 @@ dbConnection = mysql.createConnection({
 
 dbConnection.connect((err) => {
   if (err) throw err
-  exports.query("SELECT * FROM messages")
 });
 
 exports.query = function(query) {
@@ -23,7 +22,7 @@ exports.query = function(query) {
     results += JSON.stringify(data)
   })
   setTimeout(function() {
-    exports.messages = results
+    exports.results = results
   }, 2000)
 }
 
